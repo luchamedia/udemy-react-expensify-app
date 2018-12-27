@@ -1,0 +1,27 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: $m-size;
+}
+
+button {
+  cursor: pointer;
+  border: 1px solid rgb(53, 29, 29);
+  padding: $m-size;
+}
+
+button :disabled {
+  cursor: default;
+}
+
+.is-active {
+  font-weight: bold;
+}
+
+input {
+  border: 1px solid gray;
+  padding: 10px;
+}
