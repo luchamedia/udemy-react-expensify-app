@@ -1,22 +1,38 @@
 import uuid from "uuid";
+import database from "../firebase/firebase";
 
 // ADD_EXPENSE
-export const addExpense = ({
-  //destructuring the object
-  description = "",
-  note = "",
-  amount = 0,
-  createdAt = 0
-} = {}) => ({
+export const addExpense = expense => ({
   type: "ADD_EXPENSE",
-  expense: {
-    id: uuid(),
-    description, //es6 shorthand for description: description
-    note,
-    amount,
-    createdAt
-  }
+  expense
 });
+
+// Using redux-thunk to create asynchronous actions
+// Firebase data call pushes expense to Firebase DB
+// Then --> dispatch to change the redux store
+export const startAddExpense = (expenseData = {}) => {
+  return dispatch => {
+    const {
+      description = "",
+      note = "",
+      amount = 0,
+      createdAt = 0
+    } = expenseData;
+    const expense = { description, note, amount, createdAt };
+
+    return database
+      .ref("expenses")
+      .push(expense)
+      .then(ref => {
+        dispatch(
+          addExpense({
+            id: ref.key,
+            ...expense
+          })
+        );
+      });
+  };
+};
 
 // REMOVE_EXPENSE
 export const removeExpense = ({ id } = {}) => ({
