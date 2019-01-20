@@ -7,7 +7,7 @@
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack -p --env production",
     "dev-server": "webpack-dev-server --mode=development",
-    "test": "cross-dev NODE_ENV=test jest --config=jest.config.json",
+    "test": "cross-env NODE_ENV=test jest --config=jest.config.json",
     "start": "node server/server.js",
     "heroku-postbuild": "npm run build:prod"
   },
@@ -24,6 +24,7 @@
     "css-loader": "^1.0.1",
     "express": "^4.16.4",
     "firebase": "^4.2.0",
+    "history": "^4.7.2",
     "mini-css-extract-plugin": "^0.5.0",
     "moment": "^2.18.1",
     "node-sass": "^4.10.0",
